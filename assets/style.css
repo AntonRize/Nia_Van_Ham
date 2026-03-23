@@ -105,6 +105,12 @@ p  { margin-bottom: 16px; }
   padding-bottom: 2px;
 }
 
+.nav-links .btn {
+  color: #fff !important;
+  border-bottom: none !important;
+  padding-bottom: 12px !important;
+}
+
 .btn {
   display: inline-block;
   background: #A0764A;
@@ -231,6 +237,12 @@ p  { margin-bottom: 16px; }
   margin-bottom: 16px;
 }
 
+.service-card .service-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 16px;
+}
+
 .service-card h3 {
   color: #7A5C3E;
   margin-bottom: 8px;
@@ -301,6 +313,11 @@ p  { margin-bottom: 16px; }
   color: #A0764A;
   flex-shrink: 0;
   margin-top: 2px;
+}
+
+.contact-detail .detail-icon-svg {
+  flex-shrink: 0;
+  margin-top: 3px;
 }
 
 .contact-detail p {

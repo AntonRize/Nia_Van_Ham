@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Website Content — Nia Van Ham Counselling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: #F5F0EB;
+      color: #3D3228;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .admin-header {
+      background: #3D3228;
+      color: #F5F0EB;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .admin-header img { height: 44px; width: 44px; border-radius: 6px; }
+    .admin-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    .admin-header .save-btn {
+      margin-left: auto;
+      background: #A0764A;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 6px;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .admin-header .save-btn:hover { background: #7A5C3E; }
+
+    /* Status banner */
+    .status-banner {
+      display: none;
+      padding: 14px 32px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .status-banner.success { display: block; background: #d4edda; color: #155724; }
+    .status-banner.error   { display: block; background: #f8d7da; color: #721c24; }
+
+    /* Instructions bar */
+    .instructions {
+      background: #fff;
+      border-bottom: 1px solid #D4C4B0;
+      padding: 16px 32px;
+      font-size: 0.95rem;
+      color: #6B5B4E;
+    }
+    .instructions strong { color: #7A5C3E; }
+
+    /* Main content */
+    .admin-main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* Section blocks */
+    .edit-section {
+      background: #fff;
+      border: 1px solid #E8DFD4;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .edit-section-header {
+      background: linear-gradient(135deg, #EDE5DA, #D4C4B0);
+      padding: 16px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+    .edit-section-header h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: #7A5C3E;
+      font-weight: 600;
+    }
+    .edit-section-header .arrow {
+      font-size: 1.2rem;
+      color: #A0764A;
+      transition: transform 0.2s;
+    }
+    .edit-section.collapsed .edit-section-body { display: none; }
+    .edit-section.collapsed .arrow { transform: rotate(-90deg); }
+    .edit-section-body { padding: 24px; }
+
+    /* Form fields */
+    .field {
+      margin-bottom: 20px;
+    }
+    .field:last-child { margin-bottom: 0; }
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #7A5C3E;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .field label .hint {
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #A09080;
+      font-size: 0.82rem;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #D4C4B0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      color: #3D3228;
+      background: #FDFBF9;
+      transition: border-color 0.2s;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #A0764A;
+      box-shadow: 0 0 0 3px rgba(160,118,74,0.12);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .field-long textarea { min-height: 120px; }
+
+    /* Divider */
+    .field-divider {
+      border: none;
+      border-top: 1px solid #E8DFD4;
+      margin: 20px 0;
+    }
+
+    /* Modal overlay for download instructions */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(61,50,40,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 560px;
+      width: 90%;
+      padding: 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .modal h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #7A5C3E;
+      margin-bottom: 16px;
+      font-size: 1.4rem;
+    }
+    .modal p { margin-bottom: 12px; color: #4D3F34; }
+    .modal .step {
+      background: #F5F0EB;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .modal .step-num {
+      background: #A0764A;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .modal .step-text { font-size: 0.92rem; }
+    .modal .close-btn {
+      margin-top: 20px;
+      background: #A0764A;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+    .modal .close-btn:hover { background: #7A5C3E; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="admin-header">
+    <img src="assets/logo.jpeg" alt="Logo">
+    <h1>Edit Website Content</h1>
+    <button class="save-btn" onclick="saveContent()">Save Changes</button>
+  </header>
+
+  <div class="status-banner" id="statusBanner"></div>
+
+  <div class="instructions">
+    <strong>How it works:</strong> Edit the text in the fields below, then click <strong>"Save Changes"</strong>. A file will download to your computer. Then follow the simple steps to upload it to your website.
+  </div>
+
+  <!-- Main editor -->
+  <main class="admin-main" id="editorMain">
+    <!-- Sections will be generated by JavaScript -->
+  </main>
+
+  <!-- Download instructions modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h2>Your changes have been saved!</h2>
+      <p>A file called <strong>content.js</strong> has been downloaded. Now upload it to your website:</p>
+      <div class="step">
+        <span class="step-num">1</span>
+        <span class="step-text">Go to <a href="https://github.com/AntonRize/Nia_Van_Ham" target="_blank" style="color:#A0764A; text-decoration:underline;">your website on GitHub</a></span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span class="step-text">Click on the file named <strong>content.js</strong></span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-text">Click the <strong>pencil icon</strong> (edit button) in the top right</span>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-text">Select all text (Ctrl+A) and delete it, then open the downloaded file in Notepad, select all (Ctrl+A), copy (Ctrl+C), and paste (Ctrl+V) into GitHub</span>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <span class="step-text">Click the green <strong>"Commit changes"</strong> button, then click <strong>"Commit changes"</strong> again in the popup</span>
+      </div>
+      <p style="color:#A0764A; font-style:italic; margin-top:8px;">Your website will update within a few minutes!</p>
+      <button class="close-btn" onclick="document.getElementById('modalOverlay').classList.remove('active')">Got It</button>
+    </div>
+  </div>
+
+  <script src="content.js"></script>
+  <script>
+    // Field definitions — what Nia can edit
+    const SECTIONS = [
+      {
+        id: 'home',
+        title: 'Home Page',
+        fields: [
+          { key: 'headline', label: 'Main Heading', hint: 'The big text visitors see first' },
+          { key: 'tagline', label: 'Welcome Message', hint: 'A short paragraph under the heading', type: 'textarea' },
+          { key: 'sectionHeading', label: 'Section Heading', hint: 'The heading above the three cards' },
+          { key: 'sectionText', label: 'Section Description', hint: 'Text below the section heading', type: 'textarea' },
+          { key: 'card1Title', label: 'Card 1 — Title' },
+          { key: 'card1Text', label: 'Card 1 — Description', type: 'textarea' },
+          { key: 'card2Title', label: 'Card 2 — Title' },
+          { key: 'card2Text', label: 'Card 2 — Description', type: 'textarea' },
+          { key: 'card3Title', label: 'Card 3 — Title' },
+          { key: 'card3Text', label: 'Card 3 — Description', type: 'textarea' },
+          { key: 'ctaHeading', label: 'Call-to-Action Heading', hint: 'The heading at the bottom of the page' },
+          { key: 'ctaSubtext', label: 'Call-to-Action Text', hint: 'Text below the CTA heading', type: 'textarea' },
+        ]
+      },
+      {
+        id: 'about',
+        title: 'About Page',
+        fields: [
+          { key: 'name', label: 'Your Name' },
+          { key: 'qualifications', label: 'Qualifications', hint: 'Your degrees, memberships, registrations', type: 'textarea' },
+          { key: 'bio1', label: 'Bio — Paragraph 1', hint: 'Introduction about yourself', type: 'textarea', long: true },
+          { key: 'quote', label: 'Featured Quote', hint: 'A personal quote or philosophy', type: 'textarea' },
+          { key: 'bio2', label: 'Bio — Paragraph 2', hint: 'Your experience and areas of work', type: 'textarea', long: true },
+          { key: 'bio3', label: 'Bio — Paragraph 3', hint: 'Your therapeutic approach', type: 'textarea', long: true },
+          { key: 'bio4', label: 'Bio — Paragraph 4', hint: 'Anything else you want to share (optional)', type: 'textarea', long: true },
+        ]
+      },
+      {
+        id: 'services',
+        title: 'Services Page',
+        fields: [
+          { key: 'introHeading', label: 'Section Heading' },
+          { key: 'introText', label: 'Introduction Text', type: 'textarea' },
+          { key: 'service1Title', label: 'Service 1 — Title' },
+          { key: 'service1Text', label: 'Service 1 — Description', type: 'textarea' },
+          { key: 'service2Title', label: 'Service 2 — Title' },
+          { key: 'service2Text', label: 'Service 2 — Description', type: 'textarea' },
+          { key: 'service3Title', label: 'Service 3 — Title' },
+          { key: 'service3Text', label: 'Service 3 — Description', type: 'textarea' },
+          { key: 'service4Title', label: 'Service 4 — Title' },
+          { key: 'service4Text', label: 'Service 4 — Description', type: 'textarea' },
+          { key: 'service5Title', label: 'Service 5 — Title' },
+          { key: 'service5Text', label: 'Service 5 — Description', type: 'textarea' },
+          { key: 'service6Title', label: 'Service 6 — Title' },
+          { key: 'service6Text', label: 'Service 6 — Description', type: 'textarea' },
+          { key: 'service7Title', label: 'Service 7 — Title' },
+          { key: 'service7Text', label: 'Service 7 — Description', type: 'textarea' },
+          { key: 'service8Title', label: 'Service 8 — Title' },
+          { key: 'service8Text', label: 'Service 8 — Description', type: 'textarea' },
+          { divider: true },
+          { key: 'approachHeading', label: 'Approach Section — Heading' },
+          { key: 'approachText1', label: 'Approach — Paragraph 1', type: 'textarea', long: true },
+          { key: 'approachText2', label: 'Approach — Paragraph 2', type: 'textarea' },
+          { key: 'feeNote', label: 'Fee Information Note', type: 'textarea' },
+        ]
+      },
+      {
+        id: 'contact',
+        title: 'Contact Page',
+        fields: [
+          { key: 'heading', label: 'Heading' },
+          { key: 'introText', label: 'Introduction Text', type: 'textarea' },
+          { key: 'address', label: 'Practice Address' },
+          { key: 'email', label: 'Email Address' },
+          { key: 'phone', label: 'Phone Number' },
+          { key: 'hours', label: 'Practice Hours', hint: 'e.g. Monday–Friday, 9am–5pm' },
+        ]
+      }
+    ];
+
+    // Build the editor UI
+    function buildEditor() {
+      const main = document.getElementById('editorMain');
+      main.innerHTML = '';
+
+      SECTIONS.forEach(section => {
+        const div = document.createElement('div');
+        div.className = 'edit-section';
+        div.innerHTML = `
+          <div class="edit-section-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            <h2>${section.title}</h2>
+            <span class="arrow">&#9660;</span>
+          </div>
+          <div class="edit-section-body" id="section-${section.id}"></div>
+        `;
+        main.appendChild(div);
+
+        const body = div.querySelector('.edit-section-body');
+        section.fields.forEach(f => {
+          if (f.divider) {
+            body.innerHTML += '<hr class="field-divider">';
+            return;
+          }
+          const val = SITE_CONTENT[section.id]?.[f.key] || '';
+          const hintHtml = f.hint ? ` <span class="hint">— ${f.hint}</span>` : '';
+          const fieldClass = f.long ? 'field field-long' : 'field';
+
+          if (f.type === 'textarea') {
+            body.innerHTML += `
+              <div class="${fieldClass}">
+                <label for="${section.id}-${f.key}">${f.label}${hintHtml}</label>
+                <textarea id="${section.id}-${f.key}" data-section="${section.id}" data-key="${f.key}">${val}</textarea>
+              </div>`;
+          } else {
+            body.innerHTML += `
+              <div class="${fieldClass}">
+                <label for="${section.id}-${f.key}">${f.label}${hintHtml}</label>
+                <input type="text" id="${section.id}-${f.key}" data-section="${section.id}" data-key="${f.key}" value="${val.replace(/"/g, '&quot;')}">
+              </div>`;
+          }
+        });
+      });
+    }
+
+    // Collect current values and generate content.js
+    function generateContentJS() {
+      // Read all field values back into SITE_CONTENT
+      document.querySelectorAll('[data-section][data-key]').forEach(el => {
+        const section = el.dataset.section;
+        const key = el.dataset.key;
+        if (SITE_CONTENT[section]) {
+          SITE_CONTENT[section][key] = el.value;
+        }
+      });
+
+      // Generate the JS file content
+      let js = `/*\n * ============================================\n *  WEBSITE CONTENT — Nia Van Ham Counselling\n * ============================================\n *  Edit the text between the quote marks below\n *  to update what appears on the website.\n *\n *  To edit: use the Admin Editor page (admin.html)\n *  or carefully change the text in quotes here.\n * ============================================\n */\n\nconst SITE_CONTENT = `;
+      js += JSON.stringify(SITE_CONTENT, null, 2);
+      js += `;\n\n// Make content available globally\nif (typeof window !== 'undefined') {\n  window.SITE_CONTENT = SITE_CONTENT;\n}\n`;
+      return js;
+    }
+
+    // Save / download
+    function saveContent() {
+      try {
+        const content = generateContentJS();
+        const blob = new Blob([content], { type: 'application/javascript' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'content.js';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        // Show success + modal
+        const banner = document.getElementById('statusBanner');
+        banner.className = 'status-banner success';
+        banner.textContent = 'File downloaded! Follow the steps below to update your website.';
+        document.getElementById('modalOverlay').classList.add('active');
+
+        setTimeout(() => { banner.className = 'status-banner'; }, 8000);
+      } catch (e) {
+        const banner = document.getElementById('statusBanner');
+        banner.className = 'status-banner error';
+        banner.textContent = 'Something went wrong. Please try again or ask Anton for help.';
+      }
+    }
+
+    // Init
+    buildEditor();
+  </script>
+
+</body>
+</html>

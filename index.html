@@ -36,9 +36,9 @@
   <section class="hero hero-home">
     <div class="container">
       <img src="assets/logo.jpeg" alt="Nia Van Ham Counselling" class="hero-logo">
-      <h1>Welcome to Nia Van Ham Counselling</h1>
-      <p>A safe, supportive space where you can explore your thoughts and feelings. Together, we'll work towards positive change and personal growth.</p>
-      <a href="contact.html" class="btn">Book an Appointment</a>
+      <h1 data-content="home.headline">Welcome to Nia Van Ham Counselling</h1>
+      <p data-content="home.tagline">A safe, supportive space where you can explore your thoughts and feelings. Together, we'll work towards positive change and personal growth.</p>
+      <a href="contact.html" class="btn" data-content="home.ctaText">Book an Appointment</a>
     </div>
   </section>
 
@@ -46,25 +46,25 @@
   <section class="section section-alt">
     <div class="container">
       <div class="section-heading">
-        <h2>Compassionate Support for Your Journey</h2>
-        <p>Whether you're navigating anxiety, relationship difficulties, grief, or simply feeling stuck, counselling can help you find clarity and move forward with confidence.</p>
+        <h2 data-content="home.sectionHeading">Compassionate Support for Your Journey</h2>
+        <p data-content="home.sectionText">Whether you're navigating anxiety, relationship difficulties, grief, or simply feeling stuck, counselling can help you find clarity and move forward with confidence.</p>
       </div>
 
       <div class="services-grid" style="max-width:800px; margin:0 auto;">
         <div class="service-card">
-          <div class="icon">🤝</div>
-          <h3>Personalised Care</h3>
-          <p>Every person is unique. Sessions are tailored to your individual needs and goals.</p>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#A0764A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="6"/><circle cx="30" cy="18" r="6"/><path d="M12 38c0-5 3-9 7-10"/><path d="M29 28c4 1 7 5 7 10"/><path d="M19 28h10"/></svg>
+          <h3 data-content="home.card1Title">Personalised Care</h3>
+          <p data-content="home.card1Text">Every person is unique. Sessions are tailored to your individual needs and goals.</p>
         </div>
         <div class="service-card">
-          <div class="icon">🌿</div>
-          <h3>Safe Space</h3>
-          <p>A warm, non-judgmental environment where you can feel heard and supported.</p>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#A0764A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c-6 0-14 6-14 16s14 18 14 18 14-8 14-18-8-16-14-16z"/><path d="M24 20v8"/><path d="M20 24h8"/></svg>
+          <h3 data-content="home.card2Title">Safe Space</h3>
+          <p data-content="home.card2Text">A warm, non-judgmental environment where you can feel heard and supported.</p>
         </div>
         <div class="service-card">
-          <div class="icon">✨</div>
-          <h3>Evidence-Based</h3>
-          <p>Drawing on proven therapeutic approaches to support meaningful, lasting change.</p>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#A0764A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8v32"/><path d="M16 16l8-8 8 8"/><circle cx="24" cy="30" r="8"/><path d="M20 30h8"/></svg>
+          <h3 data-content="home.card3Title">Evidence-Based</h3>
+          <p data-content="home.card3Text">Drawing on proven therapeutic approaches to support meaningful, lasting change.</p>
         </div>
       </div>
     </div>
@@ -73,8 +73,8 @@
   <!-- CTA Section -->
   <section class="section" style="text-align:center;">
     <div class="container">
-      <h2 style="color:#7A5C3E;">Ready to Take the First Step?</h2>
-      <p style="max-width:540px; margin:12px auto 28px; color:#6B5B4E;">Reaching out takes courage. I'm here to support you. Get in touch to book your initial consultation.</p>
+      <h2 style="color:#7A5C3E;" data-content="home.ctaHeading">Ready to Take the First Step?</h2>
+      <p style="max-width:540px; margin:12px auto 28px; color:#6B5B4E;" data-content="home.ctaSubtext">Reaching out takes courage. I'm here to support you. Get in touch to book your initial consultation.</p>
       <a href="contact.html" class="btn">Get in Touch</a>
     </div>
   </section>
@@ -87,5 +87,14 @@
     </div>
   </footer>
 
+  <script src="content.js"></script>
+  <script>
+    document.querySelectorAll('[data-content]').forEach(el => {
+      const keys = el.dataset.content.split('.');
+      let val = SITE_CONTENT;
+      for (const k of keys) val = val?.[k];
+      if (val) el.textContent = val;
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+We need to develop 4 pages:
+
+Home: clean minimalistic use logo.jpg as a website logo and general design guide. Should have "Book Appointment" button that will redirect user on to contact page.
+
+Contact page example:   https://pacificclinicalpsych.com.au/contact    you can generate fake details for now. All the text content will be added later, we just need to have the framework ready.
+
+Services page example: https://pacificclinicalpsych.com.au/services   you can fill in a generic text here for now
+
+About page example: https://pacificclinicalpsych.com.au/about    lets use Nia's portrait.jpeg for this page and you can generate some temporal text.

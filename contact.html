@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Nia Van Ham Counselling</title>
+  <meta name="description" content="Get in touch with Nia Van Ham Counselling to book an appointment or ask a question.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.jpeg" alt="Nia Van Ham Counselling logo">
+        <span>Nia Van Ham Counselling</span>
+      </a>
+      <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html" class="btn">Book Appointment</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero-page">
+    <div class="container">
+      <h1>Contact</h1>
+    </div>
+  </section>
+
+  <!-- Contact content -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Contact details -->
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>I'd love to hear from you. Whether you're ready to book your first session or simply have a question, please don't hesitate to reach out.</p>
+
+          <div class="contact-detail">
+            <span class="detail-icon">📍</span>
+            <div>
+              <strong>Address</strong>
+              <p><em>[Practice address to be added]</em></p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <span class="detail-icon">📧</span>
+            <div>
+              <strong>Email</strong>
+              <p><em>[email@example.com — to be updated]</em></p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <span class="detail-icon">📞</span>
+            <div>
+              <strong>Phone</strong>
+              <p><em>[Phone number to be added]</em></p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <span class="detail-icon">🕐</span>
+            <div>
+              <strong>Hours</strong>
+              <p><em>[Practice hours to be added — e.g. Monday–Friday, 9am–5pm]</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Contact form -->
+        <div class="contact-form">
+          <h3>Send a Message</h3>
+          <form action="https://formspree.io/f/PLACEHOLDER" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" required placeholder="Your first name">
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" required placeholder="Your last name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group full" style="margin-bottom:16px;">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="How can I help you?"></textarea>
+            </div>
+            <button type="submit" class="btn" style="width:100%; text-align:center;">Send Message</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Nia Van Ham Counselling. All rights reserved.</p>
+      <p><a href="contact.html">Contact</a> &middot; <a href="services.html">Services</a> &middot; <a href="about.html">About</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

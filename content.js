@@ -36,12 +36,13 @@ const SITE_CONTENT = {
   about: {
     heroTitle: "About Nia",
     name: "Nia Van Ham",
-    qualifications: "[Qualifications and professional memberships to be added — e.g. Bachelor of Counselling, registered member of ACA/PACFA, etc.]",
+    qualifications: "Nia holds a Bachelor of Journalism, a Bachelor of Psychological Science from Griffith University, and a Master of Counselling from the Australian Institute of Professional Counsellors (AIPC). She is a registered member of the Australian Counselling Association.",
     bio1: "Nia is a warm, compassionate, and dedicated counsellor who is passionate about supporting people through life's challenges. She creates a safe, non-judgmental space where clients can explore their thoughts and feelings openly.",
     quote: "Counselling is about meeting you where you are — with compassion, without judgment — and walking alongside you as you find your own path forward.",
     bio2: "With experience across a range of settings, Nia has worked with individuals navigating anxiety, depression, relationship difficulties, grief and loss, trauma, life transitions, and issues of identity and self-esteem.",
-    bio3: "Nia draws on evidence-based approaches including Cognitive Behavioural Therapy (CBT), Acceptance and Commitment Therapy (ACT), and person-centred therapy, always tailoring her approach to the unique needs of each client.",
-    bio4: "[Additional personal background, specialisations, and professional journey to be added by Nia.]",
+    bio3: "Nia draws on evidence-based approaches including elements of Cognitive Behavioural Therapy (CBT), Acceptance and Commitment Therapy (ACT), and person-centred therapy, always tailoring her approach to the unique needs of each client.",
+    bio4: "With a background in journalism, publishing, and editing, Nia developed a deep appreciation for the complexity of human experience and the importance of being truly heard. This foundation naturally evolved into a commitment to psychology and counselling, where she now supports clients in a more personal and meaningful way.",
+    bio5: "Nia approaches therapy as a considered and collaborative process \u2014 a space to slow down, gain clarity, and thoughtfully explore what may feel overwhelming or difficult to articulate. Her work is grounded in presence, care, and respect, offering clients a calm and supportive environment in which deeper understanding and lasting change can emerge.",
   },
 
   // ── SERVICES PAGE ──────────────────────────
@@ -78,10 +79,10 @@ const SITE_CONTENT = {
     heroTitle: "Contact",
     heading: "Get in Touch",
     introText: "I'd love to hear from you. Whether you're ready to book your first session or simply have a question, please don't hesitate to reach out.",
-    address: "[Practice address to be added]",
-    email: "[email@example.com — to be updated]",
-    phone: "[Phone number to be added]",
-    hours: "[Practice hours to be added — e.g. Monday–Friday, 9am–5pm]",
+    address: "6 Kinarra Street, Ashmore, QLD 4214",
+    email: "hello@niavanham.com",
+    phone: "+61 405 407 909",
+    hours: "Monday\u2013Friday, 9am\u20135pm",
     formHeading: "Send a Message",
   },
 
